@@ -137,5 +137,14 @@ If extraction fails, the application will automatically fall back to cookie-less
 
 Manual cookie import is strongly recommended to ensure reliable access to member-only or restricted videos. While running the application with administrator privileges allows automatic cookie extraction from supported browsers, this functionality is limited to certain older browser versions due to browser security restrictions. If extraction fails, the application will automatically fall back to cookie-less download mode.
 
+### ⚠️ Disclaimer
+
+> This project is intended for **educational and personal use only**.
+>
+> The author does **not encourage or support** downloading copyrighted content without permission.
+>
+> Users are solely responsible for how they use this software and for ensuring compliance with **local laws, regulations, and the terms of service** of the target platforms.
+>
+> The author shall **not be held liable** for any misuse, data loss, or legal issues arising from the use of this project.
 
 
