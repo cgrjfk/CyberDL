@@ -1,0 +1,37 @@
+🔧 FFmpeg 安装说明 / FFmpeg Installation
+
+中文说明：
+
+由于 GitHub 仓库体积限制，本项目 不包含 FFmpeg 可执行文件。
+
+请前往 FFmpeg 官方网站下载：
+
+➡️ [https://ffmpeg.org/](https://ffmpeg.org/)
+
+下载完成后：
+
+1. 解压下载的压缩包
+2. 找到 `ffmpeg.exe`
+3. 将 `ffmpeg.exe` 放置到 **与 `main.py` 同一目录**
+   或将其加入系统环境变量 `PATH`
+
+当 FFmpeg 可被系统访问后，程序将自动检测并使用，无需额外配置。
+
+---
+
+English Description:
+
+Due to GitHub repository size limitations, **FFmpeg binaries are not included** in this project.
+
+Please download FFmpeg from the official website:
+
+➡️ [https://ffmpeg.org/](https://ffmpeg.org/)
+
+After downloading:
+
+1. Extract the archive
+2. Locate `ffmpeg.exe`
+3. Place `ffmpeg.exe` in the **same directory as `main.py`,
+   or make sure it is accessible via the system `PATH`
+
+Once FFmpeg is available, the application will automatically detect and use it.
