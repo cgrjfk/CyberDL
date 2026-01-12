@@ -120,7 +120,7 @@ pyinstaller --onefile --windowed --clean --icon=icon.ico --name VideoDownloader 
 
 1. Log in to the target website using your browser.
 2. Install a cookie export extension such as:
-  Chrome / Edge: *Get cookies.txt LOCALLY*
+  Chrome / Edge: *Get cookies.txt*
   Firefox: *cookies.txt*
 3. Open the target website page.
 4. Export cookies as a `cookies.txt` file.
