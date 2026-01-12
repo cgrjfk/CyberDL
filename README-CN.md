@@ -75,7 +75,7 @@
 ```
 
 VideoDownloader/
-├── main.py                    # 主程序入口
+├── main.py                   # 主程序入口
 ├── downloadWorker.py         # 下载工作线程
 ├── historyManager.py         # 历史记录管理
 ├── logSyntaxHighlighter.py   # 日志语法高亮
