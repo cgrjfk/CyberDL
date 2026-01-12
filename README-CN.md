@@ -55,8 +55,8 @@
 - **多平台支持**  
   基于 yt-dlp，支持 YouTube、TikTok、Bilibili 等多个主流视频网站
 - **智能 Cookie 管理**  
-  - 自动从浏览器提取 Cookie  
-  - 支持手动导入 Cookie 文件
+  自动从浏览器提取 Cookie  
+  支持手动导入 Cookie 文件
 - **多清晰度选择**  
   支持 `best / 1080p / 720p / 480p / 360p`
 - **批量下载**  
@@ -134,8 +134,8 @@ pyinstaller --onefile --windowed --clean --icon=icon.ico --name VideoDownloader 
 1. 使用浏览器登录目标视频网站（确保拥有合法访问权限）
 2. 安装 Cookie 导出插件，例如：
 
-   * Chrome / Edge：*Get cookies.txt LOCALLY*
-   * Firefox：*cookies.txt*
+ Chrome / Edge：*Get cookies.txt*
+ Firefox：*cookies.txt*
 3. 打开目标视频网站页面
 4. 通过插件导出 `cookies.txt` 文件
 5. 在程序中手动导入该 Cookie 文件
