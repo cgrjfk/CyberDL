@@ -73,17 +73,17 @@ cookie control, and multi-resolution downloads.
 ```
 
 VideoDownloader/
-├── main.py                    # Main program entry
+├── main.py                   # Main program entry
 ├── downloadWorker.py         # Download worker threads
 ├── historyManager.py         # History record management
 ├── logSyntaxHighlighter.py   # Log syntax highlighting
 ├── translate_data.py         # Multi-language translation data
 ├── style.qss                 # Interface stylesheet
 ├── history.qss               # history stylesheet
-├── icon.ico                 # Application icon
+├── icon.ico                  # Application icon
 ├── cookies/                  # Cookie file storage directory
 ├── requirements.txt          # Python dependencies list
-└── README.md                # Project documentation
+└── README.md                 # Project documentation
 ```
 ## 🚀 Quick Start
 
