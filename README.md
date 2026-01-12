@@ -54,8 +54,8 @@ cookie control, and multi-resolution downloads.
 - **Multi-platform Support**  
   Powered by yt-dlp, supporting YouTube, TikTok, Bilibili, and many other websites
 - **Smart Cookie Management**  
-  - Automatic browser cookie extraction  
-  - Manual cookie file import
+Automatic browser cookie extraction  
+Manual cookie file import
 - **Multiple Resolution Options**  
   Supports `best / 1080p / 720p / 480p / 360p`
 - **Batch Downloading**  
