@@ -1,7 +1,7 @@
 
 <div align="center">
 
-<h1>🎬 VideoMergeX</h1>
+<h1>🎬 CyberDL</h1>
 
 <p><strong>具有赛博朋克美学的现代化 GUI 视频下载工具，基于 yt-dlp 构建</strong></p>
 
