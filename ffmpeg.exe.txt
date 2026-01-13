@@ -16,7 +16,7 @@
    或将其加入系统环境变量 `PATH`
 
 当 FFmpeg 可被系统访问后，程序将自动检测并使用，无需额外配置。
-或者下载release，获取VidMergeX.zip解压后可在其中获取ffmpeg.exe文件
+或者下载release，获取CyberDL.zip解压后可在其中获取ffmpeg.exe文件
 
 ---
 
@@ -36,4 +36,5 @@ After downloading:
    or make sure it is accessible via the system `PATH`
 
 Once FFmpeg is available, the application will automatically detect and use it.
-Or just download the release file，obtain the VidMergeX.zip and upzip it then you can get the ffmpeg.exe in the file.
+
+Or just download the release file，obtain the CyberDL.zip and upzip it then you can get the ffmpeg.exe in the file.
