@@ -128,7 +128,7 @@ class DownloadWorker(QObject):
                     cookie_value = value
                     if not value and encrypted_value:
                         try:
-                            # 若chrome版本加密则使用yt-dlp chrome此处无法解密 建议使用手动上传 或者 道友自行加入加密chrome逻辑亦可
+                            # 加密则使用yt-dlp chrome此处无法解密 建议使手动上传cookie或者自行优化
                             continue
                         except:
                             continue
@@ -535,38 +535,69 @@ class DownloadWorker(QObject):
             postprocessors = []
             merge_format = None
 
-        ydl_opts = {
-            'format': ydl_format,
-            'outtmpl': os.path.join(self.folder, '%(title)s.%(ext)s'),
-            'noplaylist': True,
-            'quiet': True,
-            'progress_hooks': [self.yt_hook],
-            'logger': self.YTDLogger(self),
-            'postprocessors': postprocessors,
-            'merge_output_format': merge_format,
-            'prefer_ffmpeg': True,
-            'postprocessor_args': ['-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k']
-        }
+        # 设置重试次数
+        max_retries = 1
+        retry_count = 0
+        download_successful = False
 
-        # 添加cookie选项（如果可用）
-        if cookie_path:
-            ydl_opts['cookiefile'] = cookie_path
-            self.log_signal.emit(self._tr(f"✅ 使用Cookie文件: {cookie_path}",
-                                          f"✅ Using cookie file: {cookie_path}"))
+        while retry_count <= max_retries and not download_successful:
+            try:
+                if retry_count > 0:
+                    self.log_signal.emit(self._tr(f"第{retry_count}次重试下载...", f"Retry {retry_count} download..."))
+                    self.status_signal.emit(self._tr(f"重试下载中...", "Retrying download..."))
 
-        try:
-            with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-                ydl.download([self.url])
-            self.progress_signal.emit(100)
-            self.status_signal.emit(self._tr("下载完成！", "Download complete!"))
-            self.log_signal.emit(self._tr("下载成功！", "Downloaded successfully!"))
-            self.open_signal.emit(self.folder)
-            self.finished_signal.emit()
-        except Exception as e:
-            self.error_signal.emit(str(e))
-        finally:
-            # 清理临时cookie文件
-            self._cleanup_temp_cookie()
+                ydl_opts = {
+                    'format': ydl_format,
+                    'outtmpl': os.path.join(self.folder, '%(title)s.%(ext)s'),
+                    'noplaylist': True,
+                    'quiet': True,
+                    'progress_hooks': [self.yt_hook],
+                    'logger': self.YTDLogger(self),
+                    'postprocessors': postprocessors,
+                    'merge_output_format': merge_format,
+                    'prefer_ffmpeg': True,
+                    'postprocessor_args': ['-c:v', 'copy', '-c:a', 'aac', '-b:a', '192k']
+                }
+
+                # 添加cookie选项（如果可用）
+                if cookie_path:
+                    ydl_opts['cookiefile'] = cookie_path
+                    if retry_count == 0:  # 只在第一次显示
+                        self.log_signal.emit(self._tr(f"✅ 使用Cookie文件: {cookie_path}",
+                                                      f"✅ Using cookie file: {cookie_path}"))
+
+                with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+                    ydl.download([self.url])
+
+                download_successful = True
+                self.progress_signal.emit(100)
+                self.status_signal.emit(self._tr("下载完成！", "Download complete!"))
+                self.log_signal.emit(self._tr("下载成功！", "Downloaded successfully!"))
+                self.open_signal.emit(self.folder)
+                self.finished_signal.emit()
+
+            except Exception as e:
+                error_message = str(e)
+                retry_count += 1
+
+                if retry_count <= max_retries:
+                    # 如果还有重试机会
+                    self.log_signal.emit(self._tr(f"下载失败，准备重试: {error_message[:100]}",
+                                                  f"Download failed, preparing to retry: {error_message[:100]}"))
+                    self.status_signal.emit(self._tr("等待重试...", "Waiting to retry..."))
+                    # 添加短暂延迟，避免立即重试
+                    import time
+                    time.sleep(2)  # 等待2秒再重试
+                else:
+                    # 重试次数用完，仍然失败
+                    self.error_signal.emit(error_message)
+                    self.log_signal.emit(self._tr(f"下载失败，已重试{max_retries}次: {error_message}",
+                                                  f"Download failed after {max_retries} retries: {error_message}"))
+                    self.status_signal.emit(self._tr("下载失败！", "Download failed!"))
+            finally:
+                # 只有最终完成时才清理临时cookie文件
+                if retry_count > max_retries or download_successful:
+                    self._cleanup_temp_cookie()
 
     def yt_hook(self, d):
         if d['status'] == 'downloading':
@@ -594,5 +625,4 @@ class DownloadWorker(QObject):
 
         def error(self, msg):
             prefix = self.outer._tr("错误：", "Error: ")
-
             self.outer.log_signal.emit(prefix + msg)
