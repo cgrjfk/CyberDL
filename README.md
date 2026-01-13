@@ -95,7 +95,7 @@ CyberDL/
 ### Installation & Running
 ```bash
 # 1. Clone repository
-git clone https://github.com/cgrjfk/CyberDL .git
+git clone https://github.com/cgrjfk/CyberDL.git
 cd CyberDL
 
 # 2. Create conda environment and activate it(recommended)
