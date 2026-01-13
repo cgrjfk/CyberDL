@@ -23,7 +23,7 @@
 
 ## ✨ Overview
 
-**VideoMergeX** is a modern desktop video downloader built on top of **yt-dlp**.  
+**CyberDL** is a modern desktop video downloader built on top of **yt-dlp**.  
 It is designed to provide a **stable, controllable, and fully local** video downloading experience
 with a clean and user-friendly GUI.
 
@@ -72,7 +72,7 @@ Manual cookie file import
 ## 📁 Project Structure
 ```
 
-VideoDownloader/
+CyberDL/
 ├── main.py                   # Main program entry
 ├── downloadWorker.py         # Download worker threads
 ├── historyManager.py         # History record management
